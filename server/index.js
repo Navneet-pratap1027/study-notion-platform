@@ -3,7 +3,6 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const fileUpload = require("express-fileupload");
 const dotenv = require("dotenv");
-const path = require("path");
 
 // Load env
 dotenv.config();
@@ -28,7 +27,6 @@ const PORT = process.env.PORT || 4000;
 
 // ================= Middleware =================
 
-// CORS (Production Ready)
 app.use(
   cors({
     origin: true,
@@ -67,18 +65,6 @@ app.get("/api/test", (req, res) => {
     success: true,
     message: "Server running successfully",
   });
-});
-
-// ================= Serve Frontend =================
-
-// React build folder
-const buildPath = path.join(__dirname, "../build");
-
-app.use(express.static(buildPath));
-
-// All routes -> React
-app.get("*", (req, res) => {
-  res.sendFile(path.join(buildPath, "index.html"));
 });
 
 // ================= Start Server =================
