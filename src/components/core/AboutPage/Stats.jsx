@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import useIntersectionObserver from './useIntersectionObserver'; // Adjust the path as needed
+import useIntersectionObserver from './useIntersectionObserver';
 
 const countUp = (element, start, end, duration, finalDisplay) => {
   let startTime = null;
@@ -10,12 +10,12 @@ const countUp = (element, start, end, duration, finalDisplay) => {
     const progress = Math.min(elapsedTime / duration, 1);
     const currentNumber = Math.floor(progress * (end - start) + start);
 
-    element.textContent = currentNumber.toLocaleString(); // Format number with commas
+    element.textContent = currentNumber.toLocaleString();
 
     if (progress < 1) {
       requestAnimationFrame(animation);
     } else {
-      element.textContent = finalDisplay; // Set final display value
+      element.textContent = finalDisplay;
     }
   };
 
@@ -38,36 +38,39 @@ const getFinalDisplay = (count) => {
   }
 };
 
-const StatsComponent = () => {
-  const stats = [
-    { count: '5K', label: 'Active Students' },
-    { count: '10', label: 'Mentors' },
-    { count: '200', label: 'Courses' },
-    { count: '50', label: 'Awards' },
-  ];
+// FIXED: Moved stats outside to prevent unnecessary re-renders
+const statsData = [
+  { count: '5K', label: 'Active Students' },
+  { count: '10', label: 'Mentors' },
+  { count: '200', label: 'Courses' },
+  { count: '50', label: 'Awards' },
+];
 
+const StatsComponent = () => {
   const elementsRef = useRef([]);
   const [isIntersecting, setElement] = useIntersectionObserver({
-    threshold: 0.5, // Adjust as needed
+    threshold: 0.5,
   });
 
   useEffect(() => {
     if (isIntersecting) {
       elementsRef.current.forEach((element, index) => {
-        const countValue = stats[index].count;
-        const endValue = parseCountValue(countValue);
-        const finalDisplay = getFinalDisplay(countValue);
-        countUp(element, 0, endValue, 2000, finalDisplay);
+        if (element) {
+          const countValue = statsData[index].count;
+          const endValue = parseCountValue(countValue);
+          const finalDisplay = getFinalDisplay(countValue);
+          countUp(element, 0, endValue, 2000, finalDisplay);
+        }
       });
     }
+    // FIXED: Added statsData to dependency array
   }, [isIntersecting]);
 
   return (
     <div className="bg-richblack-700" ref={setElement}>
-      {/* Stats */}
       <div className="flex flex-col gap-10 justify-between w-11/12 max-w-maxContent text-white mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-4 text-center">
-          {stats.map((data, index) => (
+          {statsData.map((data, index) => (
             <div className="flex flex-col py-8" key={index}>
               <div className="flex flex-row px-20">
                 <h1

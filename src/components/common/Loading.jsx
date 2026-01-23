@@ -1,7 +1,6 @@
 import React from 'react';
 import { PropagateLoader } from 'react-spinners';
 import loadingGif from '../../assets/Images/preloader.gif';
-import bg from "../../assets/Images/loaderbg.jpg"
 
 const Loading = () => {
   return (
