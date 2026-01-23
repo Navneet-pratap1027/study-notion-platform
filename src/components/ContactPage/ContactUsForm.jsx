@@ -15,15 +15,14 @@ const ContactUsForm = () => {
   } = useForm()
 
   const submitContactForm = async (data) => {
-    // console.log("Form Data - ", data)
     try {
       setLoading(true)
-      const res = await apiConnector(
+      // FIXED: Removed 'const res =' to avoid unused variable error
+      await apiConnector(
         "POST",
         contactusEndpoint.CONTACT_US_API,
         data
       )
-      // console.log("Email Res - ", res)
       setLoading(false)
     } catch (error) {
       console.log("ERROR MESSAGE - ", error.message)
@@ -106,21 +105,18 @@ const ContactUsForm = () => {
         <label htmlFor="phonenumber" className="lable-style">
           Phone Number
         </label>
-
         <div className="flex gap-5">
           <div className="flex w-[81px] flex-col gap-2">
             <select
-              type="text"
-              name="firstname"
-              id="firstname"
-              placeholder="Enter first name"
+              name="countrycode"
+              id="countrycode"
               className="form-style"
               {...register("countrycode", { required: true })}
             >
               {CountryCode.map((ele, i) => {
                 return (
                   <option key={i} value={ele.code}>
-                    {ele.code} -{ele.country}
+                    {ele.code} - {ele.country}
                   </option>
                 )
               })}
@@ -133,8 +129,7 @@ const ContactUsForm = () => {
               id="phonenumber"
               placeholder="12345 67890"
               className="form-style"
-              {...register("phoneNo", {
-                required: {
+              {...register("phoneNo", {required: {
                   value: true,
                   message: "Please enter your Phone Number.",
                 },
@@ -178,7 +173,7 @@ const ContactUsForm = () => {
          ${
            !loading &&
            "transition-all duration-200 hover:scale-95 hover:shadow-none"
-         }  disabled:bg-richblack-500 sm:text-[16px] `}
+         }  disabled:bg-richblack-500 sm:text-[16px]` }
       >
         Send Message
       </button>

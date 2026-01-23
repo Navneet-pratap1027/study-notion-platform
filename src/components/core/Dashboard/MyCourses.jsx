@@ -14,7 +14,6 @@ import {
 export default function MyCourses() {
   const { token } = useSelector((state) => state.auth)
   const navigate = useNavigate()
-  const dispatch = useDispatch()
 
   const [courses, setCourses] = useState([])
   const [confirmationModal, setConfirmationModal] = useState(null)
@@ -30,17 +29,6 @@ export default function MyCourses() {
 
     fetchCourses()
   }, [token])
-
-  // ================= DELETE COURSE =================
-  const handleDeleteCourse = async (courseId) => {
-    const res = await deleteCourse(courseId, token)
-
-    if (res?.success) {
-      setCourses((prev) => prev.filter((c) => c._id !== courseId))
-    }
-
-    setConfirmationModal(null)
-  }
 
   return (
     <div className="px-8">
