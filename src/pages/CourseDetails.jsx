@@ -100,7 +100,7 @@ function CourseDetails() {
 
   const handleBuyCourse = () => {
     if (token) {
-      buyCourse(token, [courseId], user, navigate, dispatch)
+      buyCourse(token, [courseId], user )
       return
     }
     setConfirmationModal({
@@ -108,7 +108,7 @@ function CourseDetails() {
       text2: "Please login to Purchase Course.",
       btn1Text: "Login",
       btn2Text: "Cancel",
-      btn1Handler: () => navigate("/login"),
+      btn1Handler: () => ("/login"),
       btn2Handler: () => setConfirmationModal(null),
     })
   }
