@@ -8,7 +8,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import ForgotPassword from "./pages/ForgotPassword";
 import UpdatePassword from "./pages/UpdatePassword";
-import VerifyEmail from "./pages/VerifyEmail";
+//import VerifyEmail from "./pages/VerifyEmail";
 import Rateus from "./pages/Rateus";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
@@ -86,14 +86,14 @@ function App() {
             </OpenRoute>
           }
         />
-        <Route
+        {/* <Route
           path="verify-email"
           element={
             <OpenRoute>
               <VerifyEmail />
             </OpenRoute>
           }
-        />
+        /> */}
         <Route
           path="update-password/:id"
           element={
@@ -157,7 +157,7 @@ function App() {
         <Route path="*" element={<Error />} />
       </Routes>
       <BackToTop />
-      <Chatbot/>
+      <Chatbot />
     </div>
   );
 }

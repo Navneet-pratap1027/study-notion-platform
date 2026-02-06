@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+/* import { useEffect, useState } from "react";
 import OtpInput from "react-otp-input";
 import { Link, useNavigate } from "react-router-dom";
 import { BiArrowBack } from "react-icons/bi";
@@ -108,4 +108,4 @@ function VerifyEmail() {
   );
 }
 
-export default VerifyEmail;
+export default VerifyEmail; */

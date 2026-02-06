@@ -25,11 +25,11 @@ const app = express();
 // PORT
 const PORT = process.env.PORT || 4000;
 
-// ================= Middleware =================
+//  ================= Middleware =================
 
 app.use(
   cors({
-    origin: true,
+    origin: ["http://localhost:3000", "http://localhost:3001"], 
     credentials: true,
   })
 );
@@ -42,7 +42,7 @@ app.use(
   fileUpload({
     useTempFiles: true,
     tempFileDir: "/tmp/",
-  })
+  }),
 );
 
 // ================= DB + Cloud =================

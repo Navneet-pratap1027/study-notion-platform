@@ -6,7 +6,7 @@ import { apiConnector } from "../apiConnector";
 import { endpoints } from "../apis";
 
 const {
-  SENDOTP_API,
+  //SENDOTP_API,
   SIGNUP_API,
   LOGIN_API,
   RESETPASSTOKEN_API,
@@ -14,7 +14,7 @@ const {
 } = endpoints;
 
 /* ===== SEND OTP (Fixed with Navigate) =======*/
-export function sendOtp(email, navigate) {
+/* export function sendOtp(email, navigate) {
   return async (dispatch) => {
     dispatch(setLoading(true));
     try {
@@ -39,7 +39,7 @@ export function sendOtp(email, navigate) {
       dispatch(setLoading(false));
     }
   };
-}
+} */
 
 /* ============= SIGN UP ================= */
 export function signUp(
@@ -49,8 +49,8 @@ export function signUp(
   email,
   password,
   confirmPassword,
-  otp,
-  navigate
+  // otp,
+  navigate,
 ) {
   return async (dispatch) => {
     const toastId = toast.loading("Creating account...");
@@ -63,7 +63,7 @@ export function signUp(
         email,
         password,
         confirmPassword,
-        otp,
+        // otp,
       });
 
       console.log("SIGNUP RESPONSE:", response);
@@ -141,7 +141,9 @@ export function getPasswordResetToken(email, setEmailSent) {
   return async (dispatch) => {
     dispatch(setLoading(true));
     try {
-      const response = await apiConnector("POST", RESETPASSTOKEN_API, { email });
+      const response = await apiConnector("POST", RESETPASSTOKEN_API, {
+        email,
+      });
       console.log("RESET TOKEN RESPONSE:", response);
       if (!response.data.success) {
         throw new Error(response.data.message);
