@@ -29,7 +29,9 @@ const PORT = process.env.PORT || 4000;
 
 app.use(
   cors({
-    origin: ["http://localhost:3000", "http://localhost:3001"], 
+    origin: [process.env.FRONTEND_URL, "http://localhost:3001",
+      "https://study-notion-frontend-kappa-seven.vercel.app/",
+    ], 
     credentials: true,
   })
 );
