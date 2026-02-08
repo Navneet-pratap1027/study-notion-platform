@@ -1,6 +1,8 @@
 import { useParams, useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react"
 import axios from "axios"
+// ✅ Import catalogData to use the dynamic BASE_URL
+import { catalogData } from "../services/apis" 
 
 function Catalog() {
   const { catalogName } = useParams()
@@ -14,9 +16,8 @@ function Catalog() {
       setLoading(true) // Reset loading on catalog change
       try {
         const res = await axios.get(
-          `http://localhost:4000/api/v1/course/getCategoryPageDetails/${catalogName}`
+          `${catalogData.CATALOGPAGEDATA_API}/${catalogName}`
         )
-        // Ensure we are targeting the right data path from your backend response
         setCategory(res.data.data?.selectedCategory || res.data.data)
       } catch (err) {
         console.error("Error fetching category:", err)
