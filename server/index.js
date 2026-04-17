@@ -29,8 +29,12 @@ const PORT = process.env.PORT || 4000;
 
 app.use(
   cors({
-    origin: [process.env.FRONTEND_URL, "http://localhost:3001",
-      "https://study-notion-frontend-kappa-seven.vercel.app/",
+    origin: [
+      process.env.FRONTEND_URL, 
+      "http://localhost:3000",
+      "http://localhost:3001",
+      "https://study-notion-frontend-kappa-seven.vercel.app",
+      "https://studynotion-frontend-v1.onrender.com" // <--- Ye aapka naya Docker wala link hai
     ], 
     credentials: true,
   })
