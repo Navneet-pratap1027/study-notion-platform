@@ -1,5 +1,6 @@
 //const BASE_URL = "http://localhost:4000/api/v1";
 // apis.js mein ye change karo
+// apis.js - match the Vercel variable name
 const BASE_URL = process.env.REACT_APP_API_URL || "https://study-notion-platform.onrender.com/api/v1";
 
 console.log("BASE_URL is:", BASE_URL);
