@@ -1,19 +1,17 @@
-<<<<<<< HEAD
-//const BASE_URL = "http://localhost:4000/api/v1";
-// apis.js mein ye change karo
-// apis.js - match the Vercel variable name
-const BASE_URL = process.env.REACT_APP_API_URL || "https://study-notion-platform.onrender.com/api/v1";
+// Set REACT_APP_API_URL in Vercel (Settings > Environment Variables), then REDEPLOY.
+// CRA bakes env vars in at build time, so changing them needs a new build.
+const RENDER_API = "https://study-notion-platform.onrender.com/api/v1";
+const envUrl = process.env.REACT_APP_API_URL;
 
-console.log("BASE_URL is:", BASE_URL);
-=======
-const BASE_URL = process.env.REACT_APP_API_URL;
->>>>>>> eab70d2 (fixed base url)
+// Safety net: never ship a localhost API URL in a production build
+const BASE_URL =
+  envUrl && !(process.env.NODE_ENV === "production" && envUrl.includes("localhost"))
+    ? envUrl.replace(/\/$/, "")
+    : process.env.NODE_ENV === "production"
+    ? RENDER_API
+    : "http://localhost:4000/api/v1";
 
 console.log("BASE_URL =", BASE_URL);
-
-if (!BASE_URL) {
-  console.error("REACT_APP_API_URL is not defined!");
-}
 
 // ================= AUTH =================
 export const endpoints = {
